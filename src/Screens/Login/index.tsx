@@ -4,6 +4,8 @@ import { Feather } from '@expo/vector-icons';
 
 import { Container, Header, Logo, Input, InputContainer, InputLabel, Button, ClickableTextContainer, ClickableText } from './styles';
 import { StackScreenProps } from '@react-navigation/stack';
+import Loading from '../../Components/Loading/index';
+import UserService from '../../Services/user.service';
 
 interface IInput {
   icon?: any;
@@ -27,33 +29,50 @@ const InputComponent: React.FC<IInput> = ({label, icon, isSecure, onChangeText})
 const Login = ({ navigation }: StackScreenProps<any>) => {
   const [email, setEmail] = useState<string>('');
   const [password, setPassword] = useState<string>('');
+  const [loading, setLoading] = useState<boolean>(false);
 
-  function login() {
-    console.log({email, password});
-    if (email === 'paulocesar1252@gmail.com' && password === '123456') {
+
+  async function login() {
+    setLoading(true);
+    const response = await UserService.LogUserIn({email, senha: password})
+    console.log(response?.status);
+    
+    if (response?.status === 200) {
+      setLoading(false);
       navigation.push('Main')
     }
+    setLoading(false);
+
   }
 
-  return <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
-    <Container>
-      <View style={{marginBottom: 60, justifyContent: 'center', alignItems: 'center'}}>
-        <Logo source={require('./../../../assets/mockLogo.jpg')} />
-        <Header>Welcome back</Header>
-        <Text>Sign to continue</Text>
-      </View>
-      <InputComponent label="Email" icon="mail" isSecure={false} onChangeText={(email) => setEmail(email)}/>
-      <InputComponent label="Password" icon="lock" isSecure={true} onChangeText={(password) => setPassword(password)}/>
-      <View style={{alignSelf: 'flex-end', marginBottom: 50}}>
-        <ClickableText>Forgot Password?</ClickableText>
-      </View>
-      <Button onPress={login}><Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>LOGIN</Text></ Button>
-      <View style={{flexDirection: 'row'}}>
-        <Text>Don't have an account?</Text>
-        <ClickableText style={{marginLeft: 8}} onPress={() => navigation.push('Register')}>create new account</ClickableText>
-      </View>
-    </Container>
-  </KeyboardAvoidingView>
+  return (
+    <>
+      {
+        loading ? 
+        <Loading text="Logando na sua conta..." showLoading={loading}/>
+        :
+        <KeyboardAvoidingView behavior={Platform.OS === "ios" ? "padding" : "height"} style={{flex: 1}}>
+          <Container>
+            <View style={{marginBottom: 60, justifyContent: 'center', alignItems: 'center'}}>
+              <Logo source={require('./../../../assets/mockLogo.jpg')} />
+              <Header>Welcome back</Header>
+              <Text>Sign to continue</Text>
+            </View>
+            <InputComponent label="Email" icon="mail" isSecure={false} onChangeText={(email) => setEmail(email)}/>
+            <InputComponent label="Password" icon="lock" isSecure={true} onChangeText={(password) => setPassword(password)}/>
+            <View style={{alignSelf: 'flex-end', marginBottom: 50}}>
+              <ClickableText>Forgot Password?</ClickableText>
+            </View>
+            <Button onPress={login}><Text style={{color: '#fff', fontSize: 18, fontWeight: '600'}}>LOGIN</Text></ Button>
+            <View style={{flexDirection: 'row'}}>
+              <Text>Don't have an account?</Text>
+              <ClickableText style={{marginLeft: 8}} onPress={() => navigation.push('Register')}>create new account</ClickableText>
+            </View>
+          </Container>
+        </KeyboardAvoidingView>
+      }
+    </>
+  )
 }
 
 export default Login;
