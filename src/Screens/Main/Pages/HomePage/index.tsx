@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import { View, Text } from "react-native";
-import Header from "../../../../Components/Header/index";
 import { HomeContainer, DonationListContainer } from "./styles";
 import Donation from '../../../../Components/Donation/index';
 import { IDonation } from "../../../../Models/components.interface";
@@ -68,7 +67,6 @@ const HomePage = () => {
 
     return (
         <HomeContainer>
-            <Header />
             <View style={{flexDirection: 'row', justifyContent: "flex-end", marginBottom: 20, paddingHorizontal: 15, marginTop: 25}}>
                 <Text style={{color: "#6100FF", fontWeight: '700'}}>FILTRO</Text>
             </View>

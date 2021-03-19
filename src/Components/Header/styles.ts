@@ -7,6 +7,7 @@ export const HeaderContainer = styled.View`
   justify-content: space-between;
   padding-left: 27px;
   padding-right: 39px;
+  background-color: #fff;
 `
 
 export const Logo = styled.Image`
