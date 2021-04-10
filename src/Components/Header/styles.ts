@@ -5,7 +5,13 @@ export const HeaderContainer = styled.View`
   flex-direction: row;
   align-items: center;
   justify-content: space-between;
-  padding-left: 34px;
-  padding-right: 16px;
-  background-color: #6200EE;
+  padding-left: 27px;
+  padding-right: 39px;
+  padding-bottom: 20px;
+  background-color: #fff;
 `
+
+export const Logo = styled.Image`
+  width: 44px;
+  height: 26px;
+` 
