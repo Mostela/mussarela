@@ -1,5 +1,5 @@
 import styled from "styled-components/native";
-
+import { LinearGradient } from 'expo-linear-gradient'
 export const DonationContainer = styled.View`
     height: 248px;
     width: 49%;
@@ -10,11 +10,14 @@ export const DonationContainer = styled.View`
 `
 
 export const WantButton = styled.TouchableOpacity`
-    background-color: #302DCE;
     color: #fff;
     font-size: 10px;
     align-items: center;
     justify-content: center;
+    padding: 2px 15px;
+`
+
+export const ButtonGradient = styled(LinearGradient)`
     border-radius: 25px;
-    padding: 2px 14px 4px 15px;
+    overflow: hidden;
 `

@@ -7,6 +7,7 @@ import { createDrawerNavigator } from '@react-navigation/drawer';
 import TabBar from './../../Components/TabBar/index'
 import DrawerContent from './../../Components/DrawerContent/index'
 import HomePage from './Pages/HomePage/index';
+import CreateDonation from './Pages/CreateDonation/index'
 import Header from '../../Components/Header';
 
 const Drawer = createDrawerNavigator();

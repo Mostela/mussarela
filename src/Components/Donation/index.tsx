@@ -1,6 +1,6 @@
 import React from 'react';
 import { Image, ListRenderItem, Text, View } from 'react-native'
-import { DonationContainer, WantButton } from './styles';
+import { DonationContainer, WantButton, ButtonGradient } from './styles';
 import { FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
 import { IDonation } from '../../Models/components.interface';
 
@@ -18,9 +18,11 @@ const Donation: ListRenderItem<IDonation> = () => {
           <SimpleLineIcons name="location-pin" size={20} color="black" />
           <Text style={{marginLeft: 5, color: '#000', fontSize: 13}}>0.8 km</Text>
         </View>
-        <WantButton onPress={() => console.log('Eu quero')}>
-          <Text style={{color: '#fff', fontSize: 10}}>Eu quero</Text>
-        </WantButton>
+        <ButtonGradient colors={['#302DCE', '#703BC9']} start={{ x: -1, y: 0 }} end={{ x: 1, y: 0 }}>
+          <WantButton onPress={() => console.log('Eu quero')}>
+            <Text style={{color: '#fff', fontSize: 10}}>Eu quero</Text>
+          </WantButton>
+        </ButtonGradient>
       </View>
     </View>
   </DonationContainer>;

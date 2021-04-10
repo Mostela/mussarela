@@ -33,15 +33,15 @@ const Login = ({ navigation }: StackScreenProps<any>) => {
 
 
   async function login() {
-    setLoading(true);
-    const response = await UserService.LogUserIn({email, senha: password})
-    console.log(response?.status);
+    // setLoading(true);
+    // const response = await UserService.LogUserIn({email, senha: password})
+    // console.log(response);
     
-    if (response?.status === 200) {
-      setLoading(false);
+    // if (response?.status === 200) {
+      // setLoading(false);
       navigation.push('Main')
-    }
-    setLoading(false);
+    // }
+    // setLoading(false);
 
   }
 
