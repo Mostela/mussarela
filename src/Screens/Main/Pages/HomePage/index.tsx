@@ -11,8 +11,9 @@ import Donation from "../../../../Components/Donation/index";
 import { IDonation } from "../../../../Models/components.interface";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { StackScreenProps } from "@react-navigation/stack";
 
-const HomePage = () => {
+const HomePage = ({ navigation }: StackScreenProps<any>) => {
     const [DonationMock, setDonationMock] = useState<IDonation[]>([
         {
             id: "0825b9ed-13f3-4832-a039-b04102365c29",
@@ -21,6 +22,7 @@ const HomePage = () => {
             distance: "1.9 km",
             image:
                 "https://s3.amazonaws.com/images-pertinho/STORE_LOGO_20200930124824084051.png",
+            navigation
         },
         {
             id: "330fca09-8845-4dd6-a03f-6251727fa477",
@@ -29,6 +31,7 @@ const HomePage = () => {
             distance: "1.9 km",
             image:
                 "https://s3.amazonaws.com/images-pertinho/STORE_LOGO_20200930124824084051.png",
+            navigation
         }
     ]);
 
