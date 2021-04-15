@@ -1,26 +1,54 @@
-import React from 'react';
-import { Text } from 'react-native'
-import { Feather } from '@expo/vector-icons'; 
-import { Platform, StatusBar} from 'react-native';
+import React from "react";
+import { Text } from "react-native";
+import { Feather } from "@expo/vector-icons";
+import { Platform, StatusBar } from "react-native";
 
-import { HeaderContainer, Logo } from './styles';
-import { DrawerNavigationProp } from '@react-navigation/drawer/lib/typescript/src/types';
-import { useNavigation } from '@react-navigation/core';
+import {
+    HeaderContainer,
+    Logo,
+    Container,
+    SearchBarContainer,
+    SearchBar,
+    FilterButton,
+} from "./styles";
+import { DrawerNavigationProp } from "@react-navigation/drawer/lib/typescript/src/types";
+import { useNavigation } from "@react-navigation/core";
+import { MaterialIcons } from "@expo/vector-icons";
 
-const Header = () => { 
-  const navigation = useNavigation<DrawerNavigationProp<any>>() 
-  return <HeaderContainer style={{ paddingTop: Platform.OS === 'android' ? StatusBar.currentHeight : 0, shadowColor: "#000",
-  shadowOffset: {
-    width: 0,
-    height: 7,
-  },
-  shadowOpacity: 0.41,
-  shadowRadius: 9.11,
-  elevation: 14}}>
-    <Logo source={require("./../../../assets/logo.png")}/>
-    <Text style={{color: '#000', fontWeight: '700', fontSize: 26, }}>No Waste</Text>
-    <Feather name="menu" size={25} color="black" onPress={() => navigation.toggleDrawer()}/>
-  </HeaderContainer>;
-}
+const Header = () => {
+    const navigation = useNavigation<DrawerNavigationProp<any>>();
+    return (
+        <Container
+            style={{
+                paddingTop: 50,
+                shadowColor: "#000",
+                shadowOffset: {
+                    width: 0,
+                    height: 9,
+                },
+                shadowOpacity: 0.41,
+                shadowRadius: 10.11,
+                elevation: 18,
+            }}
+        >
+            <HeaderContainer>
+                <Logo source={require("./../../../assets/logo.png")} />
+                <Feather
+                    name="menu"
+                    size={25}
+                    color="black"
+                    onPress={() => navigation.toggleDrawer()}
+                />
+            </HeaderContainer>
+            <SearchBarContainer>
+                <SearchBar placeholder="Pesquisar" />
+                <FilterButton>
+                    <Text style={{color: '#6100FF', fontWeight: '600'}}>FILTRO</Text>
+                    <MaterialIcons name="tune" size={24} color="black" />
+                </FilterButton>
+            </SearchBarContainer>
+        </Container>
+    );
+};
 
 export default Header;

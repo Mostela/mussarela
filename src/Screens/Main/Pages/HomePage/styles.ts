@@ -4,8 +4,9 @@ import { IDonation } from '../../../../Models/components.interface';
 import { LinearGradient } from "expo-linear-gradient";
 
 export const HomeContainer = styled.View`
-    background-color: #fff;
+    background-color: #F2F2F2;
     flex: 1;
+    margin-top: 20px;
 `
 
 export const FilterButton = styled.TouchableOpacity`
