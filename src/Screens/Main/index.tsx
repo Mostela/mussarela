@@ -78,6 +78,9 @@ const TabNavigator = () => {
           return (
             <TabBar {...props} />
           );
+        }}
+        tabBarOptions={{
+          keyboardHidesTabBar: true
         }}>
         <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Volunteer" component={VolunteerScreen} />
