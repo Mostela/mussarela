@@ -6,6 +6,14 @@ import { Ionicons } from "@expo/vector-icons";
 import { Modal, Image, View, ImageSourcePropType } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
 import CreateDonation from "../../Screens/Main/Pages/CreateDonation";
+import HomeIcon from './../../../assets/home.png'
+import HomeIconActive from './../../../assets/home_active.png'
+import HeartIcon from './../../../assets/heart.png'
+import HeartIconActive from './../../../assets/heart_active.png'
+import MessageIcon from './../../../assets/message.png'
+import MessageIconActive from './../../../assets/message_active.png'
+import NotificationIcon from './../../../assets/notification.png'
+import NotificationIconActive from './../../../assets/notification_active.png'
 
 interface ITabIcon {
     icon: ImageSourcePropType;
@@ -19,7 +27,6 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
     const [modalVisible, setModalVisible] = useState(false);
     const [currentTab, setCurrentTab] = useState<string>(route.name)
 
-
     function navigateTo(route: string) {
         setCurrentTab(route)
         return navigation.navigate(route);
@@ -30,7 +37,7 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
             <View style={{ width: 40, height: 40 }}>
                 <TouchableOpacity onPress={() => selectRoute()}>
                     <Image
-                        source={active ? iconActive : icon}
+                        source={currentTab == "Home" ? HomeIcon : HomeIconActive}
                         style={{
                             width: "100%",
                             height: "100%",
@@ -46,18 +53,30 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
         <TabBarContainer
             style={{ borderTopWidth: 1, borderTopColor: "#88888833" }}
         >
-            <TabIcon
-                icon={require("./../../../assets/home.png")}
-                iconActive={require("./../../../assets/home_active.png")}
-                active={currentTab == "Home"}
-                selectRoute={() => navigateTo("Home")}
-            />
-            <TabIcon
-                icon={require("./../../../assets/heart.png")}
-                iconActive={require("./../../../assets/heart_active.png")}
-                active={currentTab == "Volunteer"}
-                selectRoute={() => navigateTo("Volunteer")}
-            />
+            <View style={{ width: 40, height: 40 }}>
+                <TouchableOpacity onPress={() => navigateTo("Home")}>
+                    <Image
+                        source={currentTab !== "Home" ? HomeIcon : HomeIconActive}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "contain",
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
+            <View style={{ width: 40, height: 40 }}>
+                <TouchableOpacity onPress={() => navigateTo("Volunteer")}>
+                    <Image
+                        source={currentTab !== "Volunteer" ? HeartIcon : HeartIconActive}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "contain",
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
             <TouchableOpacity onPress={() => setModalVisible(true)}>
                 <AddDonationButton
                     colors={["#302DCE", "#f700ff"]}
@@ -75,18 +94,30 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
                     <CreateDonation />
                 </Modal>
             </TouchableOpacity>
-            <TabIcon
-                icon={require("./../../../assets/message.png")}
-                iconActive={require("./../../../assets/message_active.png")}
-                active={currentTab == "Forum"}
-                selectRoute={() => navigateTo("Forum")}
-            />
-            <TabIcon
-                icon={require("./../../../assets/notification.png")}
-                iconActive={require("./../../../assets/notification_active.png")}
-                active={currentTab == "Messages"}
-                selectRoute={() => navigateTo("Messages")}
-            />
+            <View style={{ width: 40, height: 40 }}>
+                <TouchableOpacity onPress={() => navigateTo("Forum")}>
+                    <Image
+                        source={currentTab !== "Forum" ? MessageIcon : MessageIconActive}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "contain",
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
+            <View style={{ width: 40, height: 40 }}>
+                <TouchableOpacity onPress={() => navigateTo("Messages")}>
+                    <Image
+                        source={currentTab !== "Messages" ? NotificationIcon : NotificationIconActive}
+                        style={{
+                            width: "100%",
+                            height: "100%",
+                            resizeMode: "contain",
+                        }}
+                    />
+                </TouchableOpacity>
+            </View>
         </TabBarContainer>
     );
 };

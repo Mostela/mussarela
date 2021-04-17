@@ -1,1 +1,4 @@
-declare module "react-iconly"
+declare module "*.png" {
+    const value: any;
+    export = value;
+ }
