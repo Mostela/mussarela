@@ -1,4 +1,5 @@
 import { DrawerContentComponentProps } from "@react-navigation/drawer";
+import { StackNavigationProp } from "@react-navigation/stack";
 
 export interface IDonation {
     id: string;
@@ -6,6 +7,7 @@ export interface IDonation {
     author: string;
     distance: string;
     image: any;
+    navigation: StackNavigationProp<any>;
 }
 
 export interface IDrawerOption {

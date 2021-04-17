@@ -3,13 +3,17 @@ import { Text, View } from 'react-native';
 
 import { createBottomTabNavigator } from '@react-navigation/bottom-tabs';
 import { createDrawerNavigator } from '@react-navigation/drawer';
+import { createStackNavigator } from '@react-navigation/stack';
 
-import TabBar from './../../Components/TabBar/index'
 import DrawerContent from './../../Components/DrawerContent/index'
-import HomePage from './Pages/HomePage/index';
-import CreateDonation from './Pages/CreateDonation/index'
+import TabBar from './../../Components/TabBar/index'
 import Header from '../../Components/Header';
 
+import HomePage from './Pages/HomePage/index';
+import DonationOpened from './Pages/DonationOpened/index'
+
+
+const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
@@ -43,6 +47,17 @@ const ProfileScreen = () => {
 const Main = () => {
   return (
     <>
+      <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Main" component={DrawerNavigator} />
+        <Stack.Screen name="Donation" component={DonationOpened} />
+      </Stack.Navigator>
+    </>
+  );
+}
+
+const DrawerNavigator = () => {
+  return (
+    <>
       <Drawer.Navigator initialRouteName="Home"
         drawerPosition="right"
         drawerContent={DrawerContent}>
@@ -63,6 +78,9 @@ const TabNavigator = () => {
           return (
             <TabBar {...props} />
           );
+        }}
+        tabBarOptions={{
+          keyboardHidesTabBar: true
         }}>
         <Tab.Screen name="Home" component={HomePage} />
         <Tab.Screen name="Volunteer" component={VolunteerScreen} />
