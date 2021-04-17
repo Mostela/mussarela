@@ -1,11 +1,13 @@
 import React, { useState, useCallback } from "react";
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useRoute } from "@react-navigation/native";
-import { TabBarContainer, AddDonationButton } from "./styles";
-import { Ionicons } from "@expo/vector-icons";
-import { Modal, Image, View, ImageSourcePropType } from "react-native";
 import { TouchableOpacity } from "react-native-gesture-handler";
+import { Modal, Image, View, ImageSourcePropType } from "react-native";
+import { Ionicons } from "@expo/vector-icons";
+
+import { TabBarContainer, AddDonationButton } from "./styles";
 import CreateDonation from "../../Screens/Main/Pages/CreateDonation";
+
 import HomeIcon from './../../../assets/home.png'
 import HomeIconActive from './../../../assets/home_active.png'
 import HeartIcon from './../../../assets/heart.png'
@@ -14,13 +16,6 @@ import MessageIcon from './../../../assets/message.png'
 import MessageIconActive from './../../../assets/message_active.png'
 import NotificationIcon from './../../../assets/notification.png'
 import NotificationIconActive from './../../../assets/notification_active.png'
-
-interface ITabIcon {
-    icon: ImageSourcePropType;
-    iconActive: ImageSourcePropType;
-    active: boolean;
-    selectRoute(): void;
-}
 
 const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
     const route = useRoute();
@@ -31,23 +26,6 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
         setCurrentTab(route)
         return navigation.navigate(route);
     }
-
-    const TabIcon = useCallback(({ icon, iconActive, active, selectRoute }: ITabIcon) => {
-        return (
-            <View style={{ width: 40, height: 40 }}>
-                <TouchableOpacity onPress={() => selectRoute()}>
-                    <Image
-                        source={currentTab == "Home" ? HomeIcon : HomeIconActive}
-                        style={{
-                            width: "100%",
-                            height: "100%",
-                            resizeMode: "contain",
-                        }}
-                    />
-                </TouchableOpacity>
-            </View>
-        );
-    }, [currentTab])
 
     return (
         <TabBarContainer
