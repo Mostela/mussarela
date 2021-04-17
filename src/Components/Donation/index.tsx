@@ -1,7 +1,7 @@
 import React from 'react';
 import { Image, ListRenderItem, Text, View } from 'react-native'
-import { DonationContainer, WantButton, ButtonGradient } from './styles';
-import { FontAwesome5, SimpleLineIcons } from '@expo/vector-icons';
+import { DonationContainer, WantButton, ButtonGradient, QuantityContainer } from './styles';
+import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 import { IDonation } from '../../Models/components.interface';
 
 const Donation: ListRenderItem<IDonation> = ({item, index}) => {
@@ -9,7 +9,11 @@ const Donation: ListRenderItem<IDonation> = ({item, index}) => {
   const {navigation} = item
 
   return <DonationContainer>
-    <Image style={{height: 130, width: '100%', flex: 1, marginBottom: 8}} source={require('./../../../assets/DonationImage.png')} />
+    <Image style={{height: 130, width: '100%', flex: 1, marginBottom: 8, zIndex: 1}} source={require('./../../../assets/DonationImage.png')} />
+    <QuantityContainer>
+      <Feather name="box" size={18} color="black" />
+      <Text style={{fontSize: 10, marginLeft: 6}}>5</Text>
+    </QuantityContainer>
     <View style={{paddingHorizontal: 10}}>
       <Text style={{ fontSize: 16, color: '#000', textAlign: 'center', marginBottom: 32 }}>Cesta Básica</Text>
       <View style={{flexDirection: 'row', marginBottom: 15}}>
