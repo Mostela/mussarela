@@ -11,19 +11,13 @@ import Header from '../../Components/Header';
 
 import HomePage from './Pages/HomePage/index';
 import DonationOpened from './Pages/DonationOpened/index'
+import VolunteerPage from './Pages/VolunteerPage/index'
 
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
 const Tab = createBottomTabNavigator();
 
-function VolunteerScreen() {
-  return (
-    <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
-      <Text>Volunteer!</Text>
-    </View>
-  );
-}
 function ForumScreen() {
   return (
     <View style={{ flex: 1, justifyContent: 'center', alignItems: 'center' }}>
@@ -42,17 +36,6 @@ const ProfileScreen = () => {
   return <View style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
     <Text>Profile Screen</Text>
   </View>
-}
-
-const Main = () => {
-  return (
-    <>
-      <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Main" component={DrawerNavigator} />
-        <Stack.Screen name="Donation" component={DonationOpened} />
-      </Stack.Navigator>
-    </>
-  );
 }
 
 const DrawerNavigator = () => {
@@ -83,12 +66,23 @@ const TabNavigator = () => {
           keyboardHidesTabBar: true
         }}>
         <Tab.Screen name="Home" component={HomePage} />
-        <Tab.Screen name="Volunteer" component={VolunteerScreen} />
+        <Tab.Screen name="Volunteer" component={VolunteerPage} />
         <Tab.Screen name="Forum" component={ForumScreen} />
         <Tab.Screen name="Messages" component={MessagesScreen} />
       </Tab.Navigator>
     </>
   )
+}
+
+const Main = () => {
+  return (
+    <>
+      <Stack.Navigator initialRouteName="Main" screenOptions={{headerShown: false}}>
+        <Stack.Screen name="Main" component={DrawerNavigator} />
+        <Stack.Screen name="Donation" component={DonationOpened} />
+      </Stack.Navigator>
+    </>
+  );
 }
 
 export default Main;
