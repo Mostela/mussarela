@@ -1,12 +1,12 @@
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect } from "react"
 import { BottomTabBarProps } from "@react-navigation/bottom-tabs";
 import { useRoute } from "@react-navigation/native";
 import { TouchableOpacity } from "react-native-gesture-handler";
-import { Modal, Image, View, ImageSourcePropType } from "react-native";
+import { Modal, Image, View, ImageSourcePropType, StatusBar } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
 
 import { TabBarContainer, AddDonationButton } from "./styles";
-import CreateDonation from "../../Screens/Main/Pages/CreateDonation";
+import CreateDonation from "../../Screens/Main/Pages/CreateDonation/index";
 
 import HomeIcon from './../../../assets/home.png'
 import HomeIconActive from './../../../assets/home_active.png'
@@ -21,6 +21,12 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
     const route = useRoute();
     const [modalVisible, setModalVisible] = useState(false);
     const [currentTab, setCurrentTab] = useState<string>(route.name)
+
+    useEffect(() => {
+        if(!modalVisible) {
+            StatusBar.setHidden(false)
+        }
+    }, [modalVisible])
 
     function navigateTo(route: string) {
         setCurrentTab(route)
@@ -67,9 +73,9 @@ const TabBar: React.FC<BottomTabBarProps> = ({ navigation }) => {
                     animationType="slide"
                     presentationStyle={"fullScreen"}
                     visible={modalVisible}
-                    onRequestClose={() => setModalVisible(!modalVisible)}
+                    onRequestClose={() => setModalVisible(false)}
                 >
-                    <CreateDonation />
+                    <CreateDonation setModalVisible={setModalVisible}/>
                 </Modal>
             </TouchableOpacity>
             <View style={{ width: 40, height: 40 }}>

@@ -1,52 +1,87 @@
-import React from "react";
-import { KeyboardTypeOptions, Text, View } from "react-native";
-import { SimpleLineIcons, Ionicons } from "@expo/vector-icons";
-import { Container, Header, FormContainer, FormContainerGroup, ImageContainer } from "./styles";
-import { TextInput } from "react-native-gesture-handler";
-
-interface IPickImage {
-    label: string;
+import React, { useState } from "react";
+import {
+    Container,
+    ContentContainer,
+    SectionTitle,
+} from "./../DonationOpened/styles";
+import { NewItemContainer } from "./styles";
+import PageHeader from "../../../../Components/PageHeader/index";
+import { View, Text, StatusBar, TouchableOpacity, Image } from "react-native";
+import DonationProducts from "../../../../Components/DonationProduct";
+import { IProduct } from "../../../../Models/product.interface";
+import HeartIcon from './../../../../../assets/heart.png'
+import { Ionicons } from "@expo/vector-icons";
+interface IModal {
+    setModalVisible(active: boolean): void;
 }
 
-interface IInput {
-    label: string;
-    keyBoardType: KeyboardTypeOptions
-    onChange?(value: string): void;
-}
+const CreateDonation = ({ setModalVisible }: IModal) => {
+    StatusBar.setHidden(true);
+    const [products, setProduct] = useState<IProduct[]>([
+        {
+            id: "1",
+            title: "Livros e Camisetas",
+            description:
+                "Livro da clarice linspector super atual e conceituado",
+            quantity: "2",
+            image: require("./../../../../../assets/DonationImage.png"),
+        },
+        {
+            id: "2",
+            title: "Livros e Camisetas",
+            description:
+                "Livro da clarice linspector super atual e conceituado",
+            quantity: "2",
+            image: require("./../../../../../assets/DonationImage.png"),
+        },
+    ]);
 
-const PickImage = ({label}: IPickImage) => {
-    return <ImageContainer style={{ borderRadius: 10 }}>
-        <Ionicons name="image-outline" size={30} color="black" />
-        <Text style={{ fontSize: 8, color: '#00000055', fontWeight: '700', marginTop: 5 }}>{label}</Text>
-    </ImageContainer>
-}
+    const addProduct = () => {
+        setProduct([...products, {
+            id: Math.floor((Math.random() * 100) + 3).toString(),
+            title: "Livros e Camisetas",
+            description: "Livro da clarice linspector super atual e conceituado",
+            quantity: "2",
+            image: require("./../../../../../assets/DonationImage.png"),
+        }])
+    }
 
-const InputComponent: React.FC<IInput> = ({label, keyBoardType, onChange}) => {
-    return (
-        <View>
-            <Text style={{fontSize: 12, marginBottom: 6, fontWeight: '700'}}>{label}</Text>
-            <TextInput keyboardType={keyBoardType} onChangeText={onChange}/>
-        </View>
-    );
-}
-
-const CreateDonation = () => {
     return (
         <Container>
-            <Header>
-                <SimpleLineIcons name="arrow-left" size={30} color="black" style={{position: 'absolute', left: 0}} />
-                <Text style={{ fontSize: 18, fontWeight: '700' }}>NOVA DOAÇÃO</Text>
-            </Header>
-
-            <FormContainer>
-                <FormContainerGroup>
-                    <PickImage label="Imagem principal" />
-                    <View style={{flex: 1}}>
-                        <InputComponent label="Título da Doação" keyBoardType="default" />
-                    </View>
-                </FormContainerGroup>
-
-            </FormContainer>
+            <PageHeader
+                title={"Nova doação"}
+                shareable={false}
+                goBack={() => setModalVisible(false)}
+            />
+            <ContentContainer>
+                <View style={{ marginBottom: 20 }}>
+                    <SectionTitle>Produtos</SectionTitle>
+                    {products.map((product) => {
+                        return (
+                            <DonationProducts key={product.id} {...product} />
+                        );
+                    })}
+                    <NewItemContainer onPress={() => addProduct()}>
+                        <View style={{ width: 40, height: 40, marginBottom: 5 }}>
+                            <Image
+                                source={ HeartIcon }
+                                style={{
+                                    width: "100%",
+                                    height: "100%",
+                                    resizeMode: "contain"
+                                }}
+                            />
+                            <View style={{ position: 'absolute', bottom: 3, right: 0, borderRadius: 4, width: 12.5, height: 12.5, backgroundColor: "#808080", justifyContent: "center", alignItems: "center" }}>
+                                <Ionicons name="add" size={10} color="white" />
+                            </View>
+                        </View>
+                        <Text style={{ color: "#808080" }}>Clique para adicionar um produto</Text>
+                    </NewItemContainer>
+                </View>
+                <View style={{ marginBottom: 20 }}>
+                    <SectionTitle>Endereço</SectionTitle>
+                </View>
+            </ContentContainer>
         </Container>
     );
 };

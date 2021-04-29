@@ -11,21 +11,14 @@ import {
   AccountInfoText,
   IconContainer,
   Icon,
-  HorizontalView,
-  ProductContainer,
-  ProductImage,
-  ProductInfoContainer,
-  ProductTitle,
-  ProductButtonContainer,
-  ProductDescription,
-  ButtonGradient,
-  WantButton
+  HorizontalView
 } from "./styles";
 import PageHeader from "../../../../Components/PageHeader/index";
-import { View, Text, ImageSourcePropType } from 'react-native';
+import { View, ImageSourcePropType } from 'react-native';
 import { SimpleLineIcons, MaterialCommunityIcons, AntDesign, Feather } from '@expo/vector-icons';
 import HeartIcon from './../../../../../assets/heart.png'
 import { StackScreenProps } from "@react-navigation/stack";
+import DonationProducts from "./../../../../Components/DonationProduct/index";
 
 interface IProduct {
     id: string;
@@ -33,29 +26,6 @@ interface IProduct {
     description: string;
     quantity: string;
     image: ImageSourcePropType;
-}
-
-const DonationProducts = ({id, title, description, quantity, image}: IProduct) => {
-    return (
-      <ProductContainer key={id}>
-          <ProductImage source={image}/>
-          <ProductInfoContainer>
-              <ProductTitle>{title}</ProductTitle>
-              <ProductDescription>{description}</ProductDescription>
-              <ProductButtonContainer>
-                  <HorizontalView>
-                      <Feather name="box" size={20} color="black" />
-                      <Text style={{marginLeft: 5}}>{quantity}</Text>
-                  </HorizontalView>
-                  <ButtonGradient colors={['#302DCE', '#f700ff']} start={{ x: 1, y: 0 }} end={{ x: 0, y: 1 }}>
-                      <WantButton onPress={() => console.log('ola')}>
-                          <Text style={{color: '#fff', fontSize: 12, fontWeight: '700'}}>Ver</Text>
-                      </WantButton>
-                  </ButtonGradient>
-              </ProductButtonContainer>
-          </ProductInfoContainer>
-      </ProductContainer>
-    )
 }
 
 const DonationOpened = ({ navigation }: StackScreenProps<any>) => {

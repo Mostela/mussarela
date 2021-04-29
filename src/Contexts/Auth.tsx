@@ -1,12 +1,11 @@
 import React, { createContext, useState, useEffect } from "react";
-import UserService from "./../Service/user.service";
+import UserService from "./../Services/user.service";
 import { IUserLogin, IUser } from "../Models/User.interface";
 interface IAuthContext {
     signed: boolean;
     user: IUser | null;
     loading: boolean;
     signin(user: IUserLogin): Promise<void | string>;
-    updateUserFN(user: IUser): Promise<void | string>;
 }
 
 const AuthContext = createContext<IAuthContext>({} as IAuthContext);
@@ -40,7 +39,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
     async function signin(userData: IUserLogin): Promise<void | string> {
         try {
-            const response = await login(userData);
+            const response = await UserService.LogUserIn(userData);
 
             setUser(response.data);
             setToken(response.data.token);
@@ -51,24 +50,9 @@ export const AuthProvider: React.FC = ({ children }) => {
         }
     }
 
-    async function updateUserFN(userData: IUser): Promise<void | string> {
-        try {
-            userData.id = user?.id;
-            const response = await updateUser(userData, token);
-            const [updatedUser] = response.data;
-
-            setUser(updatedUser);
-
-            setStorage(user, token);
-            return;
-        } catch (error) {
-            return "Erro no update";
-        }
-    }
-
     return (
         <AuthContext.Provider
-            value={{ signed: !!user, user, loading, signin, updateUserFN }}
+            value={{ signed: !!user, user, loading, signin }}
         >
             {children}
         </AuthContext.Provider>

@@ -10,13 +10,15 @@ const Stack = createStackNavigator();
 
 export default function Index() {
   return (
-    <NavigationContainer >
+    <>
       <StatusBar translucent={true} style="dark"/>
-      <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
-        <Stack.Screen name="Login" component={Login} />
-        <Stack.Screen name="Register" component={Register} />
-        <Stack.Screen name="Main" component={Main} />
-      </Stack.Navigator>
-    </NavigationContainer>
+      <NavigationContainer >
+        <Stack.Navigator initialRouteName="Login" screenOptions={{headerShown: false}}>
+          <Stack.Screen name="Login" component={Login} />
+          <Stack.Screen name="Register" component={Register} />
+          <Stack.Screen name="Main" component={Main} />
+        </Stack.Navigator>
+      </NavigationContainer>
+    </>
   );
 }

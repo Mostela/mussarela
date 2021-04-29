@@ -15,11 +15,9 @@ const PageHeader = ({ title, shareable, goBack }: IPageHeader) => {
                 <SimpleLineIcons name="arrow-left" size={28} color="black" />
             </HeaderBtn>
             <Title>{title}</Title>
-            {shareable ? (
-                <HeaderBtn>
-                    <Ionicons name="share-outline" size={24} color="black" />
-                </HeaderBtn>
-            ) : (<></>)}
+            <HeaderBtn style={{opacity: shareable ? 1 : 0}}>
+                <Ionicons name="share-outline" size={24} color="black" />
+            </HeaderBtn>
         </Container>
     );
 };
