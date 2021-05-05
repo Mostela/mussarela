@@ -1,16 +1,17 @@
 import React, { useState } from "react";
+import { View, Text, StatusBar, Image, Modal } from "react-native";
+import { NewItemContainer, NewProductPlusIcon } from "./styles";
 import {
     Container,
     ContentContainer,
     SectionTitle,
 } from "./../DonationOpened/styles";
-import { NewItemContainer } from "./styles";
 import PageHeader from "../../../../Components/PageHeader/index";
-import { View, Text, StatusBar, TouchableOpacity, Image } from "react-native";
 import DonationProducts from "../../../../Components/DonationProduct";
 import { IProduct } from "../../../../Models/product.interface";
 import HeartIcon from './../../../../../assets/heart.png'
 import { Ionicons } from "@expo/vector-icons";
+import AddProduct from './../../Modals/AddProduct/index'
 interface IModal {
     setModalVisible(active: boolean): void;
 }
@@ -35,6 +36,8 @@ const CreateDonation = ({ setModalVisible }: IModal) => {
             image: require("./../../../../../assets/DonationImage.png"),
         },
     ]);
+
+    const [addProductModal, setaddProductModal] = useState<boolean>(false);
 
     const addProduct = () => {
         setProduct([...products, {
@@ -61,7 +64,7 @@ const CreateDonation = ({ setModalVisible }: IModal) => {
                             <DonationProducts key={product.id} {...product} />
                         );
                     })}
-                    <NewItemContainer onPress={() => addProduct()}>
+                    <NewItemContainer onPress={() => setaddProductModal(true)}>
                         <View style={{ width: 40, height: 40, marginBottom: 5 }}>
                             <Image
                                 source={ HeartIcon }
@@ -71,12 +74,20 @@ const CreateDonation = ({ setModalVisible }: IModal) => {
                                     resizeMode: "contain"
                                 }}
                             />
-                            <View style={{ position: 'absolute', bottom: 3, right: 0, borderRadius: 4, width: 12.5, height: 12.5, backgroundColor: "#808080", justifyContent: "center", alignItems: "center" }}>
+                            <NewProductPlusIcon>
                                 <Ionicons name="add" size={10} color="white" />
-                            </View>
+                            </NewProductPlusIcon>
                         </View>
                         <Text style={{ color: "#808080" }}>Clique para adicionar um produto</Text>
                     </NewItemContainer>
+                    <Modal
+                    animationType="slide"
+                    presentationStyle={"fullScreen"}
+                    visible={addProductModal}
+                    onRequestClose={() => setaddProductModal(false)}
+                    >
+                        <AddProduct setaddProductModal={setaddProductModal}/>
+                    </Modal>
                 </View>
                 <View style={{ marginBottom: 20 }}>
                     <SectionTitle>Endereço</SectionTitle>

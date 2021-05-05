@@ -13,6 +13,8 @@ import HomePage from './Pages/HomePage/index';
 import DonationOpened from './Pages/DonationOpened/index'
 import VolunteerPage from './Pages/VolunteerPage/index'
 
+import { DonationProvider } from './../../Contexts/Donation'
+
 
 const Stack = createStackNavigator();
 const Drawer = createDrawerNavigator();
@@ -55,21 +57,23 @@ const DrawerNavigator = () => {
 const TabNavigator = () => {
   return (
     <>
-      <Header />
-      <Tab.Navigator
-        tabBar={props => {
-          return (
-            <TabBar {...props} />
-          );
-        }}
-        tabBarOptions={{
-          keyboardHidesTabBar: true
-        }}>
-        <Tab.Screen name="Home" component={HomePage} />
-        <Tab.Screen name="Volunteer" component={VolunteerPage} />
-        <Tab.Screen name="Forum" component={ForumScreen} />
-        <Tab.Screen name="Messages" component={MessagesScreen} />
-      </Tab.Navigator>
+      <DonationProvider>
+        <Header />
+        <Tab.Navigator
+          tabBar={props => {
+            return (
+              <TabBar {...props} />
+            );
+          }}
+          tabBarOptions={{
+            keyboardHidesTabBar: true
+          }}>
+          <Tab.Screen name="Home" component={HomePage} />
+          <Tab.Screen name="Volunteer" component={VolunteerPage} />
+          <Tab.Screen name="Forum" component={ForumScreen} />
+          <Tab.Screen name="Messages" component={MessagesScreen} />
+        </Tab.Navigator>
+      </DonationProvider>
     </>
   )
 }

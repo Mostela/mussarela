@@ -40,10 +40,6 @@ export const AuthProvider: React.FC = ({ children }) => {
     async function signin(userData: IUserLogin): Promise<void | string> {
         try {
             const response = await UserService.LogUserIn(userData);
-
-            setUser(response.data);
-            setToken(response.data.token);
-
             return;
         } catch (error) {
             return "O email ou a senha inserida não corresponde a nenhuma conta";
