@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { LinearGradient } from 'expo-linear-gradient'
 
 export const NewItemContainer = styled.TouchableOpacity`
     height: 100px;
@@ -13,12 +14,21 @@ export const NewItemContainer = styled.TouchableOpacity`
 
 export const NewProductPlusIcon = styled.View`
     position: absolute;
-    bottom: 3px;
-    right: 0;
+    bottom: 0;
+    right: 3px;
     border-radius: 4px;
     width: 12.5px;
     height: 12.5px;
     background-color: #808080;
+    justify-content: center;
+    align-items: center;
+`
+
+export const ButtonGradient = styled(LinearGradient)`
+    border-radius: 25px;
+    overflow: hidden;
+    height: 50px;
+    width: 50%;
     justify-content: center;
     align-items: center;
 `

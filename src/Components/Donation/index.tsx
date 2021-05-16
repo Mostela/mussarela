@@ -5,8 +5,6 @@ import { Feather, SimpleLineIcons } from '@expo/vector-icons';
 import { IDonation } from '../../Models/components.interface';
 
 const Donation: ListRenderItem<IDonation> = ({item, index}) => {
-  console.log(item);
-
   const {navigation} = item
 
   return <DonationContainer>

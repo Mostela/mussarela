@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import {
     HorizontalView,
     ProductContainer,
@@ -21,9 +21,15 @@ const DonationProducts = ({
     quantity,
     image,
 }: IProduct) => {
+
+    useEffect(() => {
+        console.log(image, 'Image porraaaaa');
+        
+    })
+
     return (
         <ProductContainer key={id}>
-            <ProductImage source={image} />
+            <ProductImage source={{ uri: image[0].image }} />
             <ProductInfoContainer>
                 <ProductTitle>{title}</ProductTitle>
                 <ProductDescription>{description}</ProductDescription>

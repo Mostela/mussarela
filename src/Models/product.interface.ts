@@ -5,5 +5,5 @@ export interface IProduct {
     title: string;
     description: string;
     quantity: string;
-    image: ImageSourcePropType;
+    image: any;
 }
